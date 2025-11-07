@@ -53,17 +53,21 @@
           "defaultConfiguration": "production"
         },
         "serve": {
-          "builder": "@angular/build:dev-server",
-          "configurations": {
-            "production": {
-              "buildTarget": "mean-stack-frontend:build:production"
-            },
-            "development": {
-              "buildTarget": "mean-stack-frontend:build:development"
-            }
-          },
-          "defaultConfiguration": "development"
-        },
+  "builder": "@angular-devkit/build-angular:dev-server", // Note: Changed builder for stability
+  "options": {                                          // <-- START OF CORRECT LOCATION for PROXY CONFIG
+    "proxyConfig": "proxy.conf.json"
+  },                                                    // <-- END OF CORRECT LOCATION
+
+  "configurations": {
+    "production": {
+      "buildTarget": "mean-stack-frontend:build:production"
+    },
+    "development": {
+      "buildTarget": "mean-stack-frontend:build:development"
+    }
+  },
+  "defaultConfiguration": "development"
+},
         "extract-i18n": {
           "builder": "@angular/build:extract-i18n"
         },
